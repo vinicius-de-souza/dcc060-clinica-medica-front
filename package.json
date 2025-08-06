@@ -1,0 +1,16 @@
+{
+  "name": "clinica-medica-frontend",
+  "version": "1.0.0",
+  "description": "Medical Clinic Management System - Frontend",
+  "scripts": {
+    "start": "python -m http.server 8080",
+    "dev": "python -m http.server 8080 --bind 127.0.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vinicius-de-souza/dcc060-clinica-medica-frontend.git"
+  },
+  "keywords": ["medical", "clinic", "frontend", "static"],
+  "author": "",
+  "license": "ISC"
+}
