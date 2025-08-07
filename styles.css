@@ -316,6 +316,29 @@ header p {
 }
 
 /* Modal */
+#add-patient-modal .modal-content {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+#add-patient-modal .patient-form {
+    padding: 10px 15px;
+}
+
+#add-patient-modal .form-grid {
+    grid-template-rows: auto;
+    gap: 8px;
+}
+
+#add-patient-modal .form-group {
+    margin-bottom: 8px;
+}
+
+#add-patient-modal textarea {
+    min-height: 60px;
+    resize: vertical;
+}
+
 .modal {
     display: none;
     position: fixed;

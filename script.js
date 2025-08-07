@@ -359,3 +359,24 @@ document.addEventListener('keydown', (e) => {
         hideAlert();
     }
 });
+
+function openAddPatientModal() {
+    document.getElementById('add-patient-modal').style.display = 'block';
+}
+
+function closeAddPatientModal() {
+    document.getElementById('add-patient-modal').style.display = 'none';
+}
+
+// Fechar modal quando clicar fora do conteúdo
+window.onclick = function(event) {
+    const addModal = document.getElementById('add-patient-modal');
+    const editModal = document.getElementById('edit-modal');
+    
+    if (event.target == addModal) {
+        closeAddPatientModal();
+    }
+    if (event.target == editModal) {
+        closeModal();
+    }
+}
