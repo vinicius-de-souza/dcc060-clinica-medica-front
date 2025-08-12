@@ -28,7 +28,7 @@ header {
 header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 header p {
@@ -43,7 +43,7 @@ header p {
     background: white;
     border-radius: 10px;
     padding: 5px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .tab-button {
@@ -71,7 +71,7 @@ header p {
 .tab-button.active {
     background: #007bff;
     color: white;
-    box-shadow: 0 2px 4px rgba(0,123,255,0.3);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
 }
 
 /* Tab Content */
@@ -80,7 +80,7 @@ header p {
     background: white;
     border-radius: 15px;
     padding: 30px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .tab-content.active {
@@ -157,7 +157,7 @@ header p {
 
 .patient-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     border-color: #007bff;
 }
 
@@ -204,7 +204,7 @@ header p {
 }
 
 .btn-delete:hover {
-    background: #c82333;
+    background: #e67a84;
 }
 
 .patient-info {
@@ -339,6 +339,29 @@ header p {
     resize: vertical;
 }
 
+#edit-modal .modal-content {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+#edit-modal .patient-form {
+    padding: 10px 15px;
+}
+
+#edit-modal .form-grid {
+    grid-template-rows: auto;
+    gap: 8px;
+}
+
+#edit-modal .form-group {
+    margin-bottom: 8px;
+}
+
+#edit-modal textarea {
+    min-height: 60px;
+    resize: vertical;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -347,7 +370,7 @@ header p {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
 }
 
@@ -360,7 +383,7 @@ header p {
     max-width: 600px;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .modal-header {
@@ -392,6 +415,193 @@ header p {
     margin: 20px 30px 30px 30px;
 }
 
+/* Container da lista */
+#patients-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Item do paciente */
+.patient-item {
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.patient-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.patient-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+}
+
+/* Nome do paciente */
+.patient-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    flex-grow: 1;
+}
+
+/* Botões de ação */
+.patient-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.btn-view {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.btn-edit {
+    background-color: #fff8e1;
+    color: #ff8f00;
+}
+
+.btn-delete {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.btn-action:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+/* Mensagem quando não há pacientes */
+.no-patients {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.no-patients i {
+    font-size: 3rem;
+    opacity: 0.3;
+    margin-bottom: 15px;
+}
+
+.no-patients p {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.no-patients small {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* Estilos para o modal de visualização */
+#view-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#view-modal .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.view-field {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    min-height: 20px;
+    margin-top: 5px;
+    border: 1px solid #e9ecef;
+}
+
+.patient-view-form .form-group {
+    margin-bottom: 15px;
+}
+
+.patient-view-form label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #777;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.btn-close {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-close:hover {
+    background-color: #5a6268;
+}
+
 /* Alerts */
 .alert {
     position: fixed;
@@ -406,7 +616,7 @@ header p {
     align-items: center;
     justify-content: space-between;
     min-width: 300px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .alert.success {
@@ -473,6 +683,7 @@ header p {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
