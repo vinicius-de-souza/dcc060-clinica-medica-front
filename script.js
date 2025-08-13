@@ -1,13 +1,13 @@
-// Configuration
+// Configuração
 const API_BASE_URL = 'https://dcc060-clinica-medica.onrender.com/api';
 //const API_BASE_URL = 'http://localhost:3000/api';
 
 
-// Global variables
+// Variáveis globais
 let patients = [];
 let editingPatientId = null;
 
-// DOM Elements
+// Elementos DOM
 const patientsTab = document.getElementById('patients');
 const addPatientTab = document.getElementById('add-patient');
 const patientsList = document.getElementById('patients-list');
@@ -18,38 +18,38 @@ const editModal = document.getElementById('edit-modal');
 const alert = document.getElementById('alert');
 const alertMessage = document.getElementById('alert-message');
 
-// Initialize application
+// Inicializa a aplicação
 document.addEventListener('DOMContentLoaded', function () {
     loadPatients();
     setupFormSubmissions();
     setupInputMasks();
 });
 
-// Tab Management
+// Gerenciamento de abas
 function showTab(tabName) {
-    // Hide all tabs
+    // Oculta todas as abas
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.remove('active');
     });
 
-    // Remove active class from all buttons
+    // Remove a classe ativa de todos os botões
     document.querySelectorAll('.tab-button').forEach(button => {
         button.classList.remove('active');
     });
 
-    // Show selected tab
+    // Exibe a aba selecionada
     document.getElementById(tabName).classList.add('active');
 
-    // Add active class to clicked button
+    // Adiciona a classe ativa ao botão clicado
     event.target.classList.add('active');
 
-    // Load patients if switching to patients tab
+    // Carrega os pacientes se estiver mudando para a aba de pacientes
     if (tabName === 'patients') {
         loadPatients();
     }
 }
 
-// API Functions
+// Funções da API
 async function apiRequest(endpoint, options = {}) {
     try {
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -65,7 +65,7 @@ async function apiRequest(endpoint, options = {}) {
             throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
 
-        // Handle 204 No Content responses
+        // Lida com respostas 204 Sem Conteúdo
         if (response.status === 204) {
             return null;
         }
@@ -77,7 +77,7 @@ async function apiRequest(endpoint, options = {}) {
     }
 }
 
-// Load patients from API
+// Carrega os pacientes da API
 async function loadPatients() {
     try {
         showLoading(true);
@@ -93,7 +93,7 @@ async function loadPatients() {
     }
 }
 
-// Render patients list
+// Renderiza a lista de pacientes
 function renderPatients(patientsToRender) {
     const patientsList = document.getElementById('patients-list');
 
@@ -213,7 +213,7 @@ function closeViewModal() {
     }
 }
 
-// Filter patients
+// Filtrar pacientes
 function filterPatients() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const filteredPatients = patients.filter(patient =>
@@ -225,7 +225,7 @@ function filterPatients() {
     renderPatients(filteredPatients);
 }
 
-// Create new patient
+// Criar novo paciente
 async function createPatient(patientData) {
     const formattedPatient = {
         ...patientData,
@@ -263,14 +263,14 @@ function formatDateForDB(dateString) {
     return dateString;
 }
 
-// Edit patient
+// Editar paciente
 function editPatient(id) {
     const patient = patients.find(p => p.id_pessoa === id);
     if (!patient) return;
 
     editingPatientId = id;
 
-    // Populate edit form
+    // Preenche o formulário de edição
     document.getElementById('edit-nome').value = patient.nome || '';
     document.getElementById('edit-cpf').value = patient.cpf || '';
     document.getElementById('edit-telefone').value = patient.telefone || '';
@@ -282,7 +282,7 @@ function editPatient(id) {
     editModal.style.display = 'block';
 }
 
-// Update patient
+// Atualizar paciente
 async function updatePatient(patientData) {
     try {
         await apiRequest(`/pacientes/${editingPatientId}`, {
@@ -299,7 +299,7 @@ async function updatePatient(patientData) {
     }
 }
 
-// Delete patient
+// Excluir paciente
 async function deletePatient(id) {
     const patient = patients.find(p => p.id_pessoa === id);
     if (!patient) return;
@@ -321,21 +321,21 @@ async function deletePatient(id) {
     }
 }
 
-// Form handling
+// Manipulação de formulário
 function setupFormSubmissions() {
     patientForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(patientForm);
         const patientData = Object.fromEntries(formData.entries());
 
-        // Clean up empty values
+        // Remove valores vazios
         Object.keys(patientData).forEach(key => {
             if (patientData[key] === '') {
                 delete patientData[key];
             }
         });
 
-        // Convert id_convenio to number if provided
+        // Converte id_convenio para número, se fornecido
         if (patientData.id_convenio) {
             patientData.id_convenio = parseInt(patientData.id_convenio);
         }
@@ -348,14 +348,14 @@ function setupFormSubmissions() {
         const formData = new FormData(editForm);
         const patientData = Object.fromEntries(formData.entries());
 
-        // Clean up empty values
+        // Remove valores vazios
         Object.keys(patientData).forEach(key => {
             if (patientData[key] === '') {
                 delete patientData[key];
             }
         });
 
-        // Convert id_convenio to number if provided
+        // Converte id_convenio para número, se fornecido
         if (patientData.id_convenio) {
             patientData.id_convenio = parseInt(patientData.id_convenio);
         }
@@ -364,9 +364,9 @@ function setupFormSubmissions() {
     });
 }
 
-// Input masks
+// Máscaras de entrada
 function setupInputMasks() {
-    // CPF mask
+    // Máscara CPF
     document.querySelectorAll('input[name="cpf"]').forEach(input => {
         input.addEventListener('input', (e) => {
             let value = e.target.value.replace(/\D/g, '');
@@ -377,7 +377,7 @@ function setupInputMasks() {
         });
     });
 
-    // Phone mask
+    // Máscara de telefone
     document.querySelectorAll('input[name="telefone"]').forEach(input => {
         input.addEventListener('input', (e) => {
             let value = e.target.value.replace(/\D/g, '');
@@ -388,25 +388,25 @@ function setupInputMasks() {
     });
 }
 
-// Modal functions
+// Funções do modal
 function closeModal() {
     editModal.style.display = 'none';
     editingPatientId = null;
 }
 
-// Close modal when clicking outside
+// Fecha o modal ao clicar fora
 window.addEventListener('click', (e) => {
     if (e.target === editModal) {
         closeModal();
     }
 });
 
-// Reset form
+// Redefinir formulário
 function resetForm() {
     patientForm.reset();
 }
 
-// Utility functions
+// Funções utilitárias
 function showLoading(show) {
     loading.style.display = show ? 'block' : 'none';
 }
@@ -416,7 +416,7 @@ function showAlert(message, type = 'success') {
     alert.className = `alert ${type}`;
     alert.style.display = 'flex';
 
-    // Auto hide after 5 seconds
+    // Oculta automaticamente após 5 segundos
     setTimeout(hideAlert, 5000);
 }
 
@@ -430,7 +430,7 @@ function formatDate(dateString) {
     return date.toLocaleDateString('pt-BR');
 }
 
-// Handle escape key
+// Manipula a tecla escape
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeModal();
